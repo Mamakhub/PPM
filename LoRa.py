@@ -174,13 +174,15 @@ class LoRaPacket(LoRa):
             packet_info: Dictionary with packet data
             rssi: RSSI value in dBm
         """
-        print(f"\nDeviceID: {packet_info['device_id']} | "
+        print("=" * 80)
+        print(f"DeviceID: {packet_info['device_id']} | "
               f"Type: {packet_info['type_name']} | "
               f"Priority: {packet_info['priority']} | "
               f"Payload: {packet_info['payload']} | ")
         print(f"Timestamp: {packet_info['timestamp']} | "
               f"CRC: {hex(packet_info['crc'])} | RSSI: {rssi} dBm")
-    
+        print("=" * 80)
+
     def send_packet(self, packet_bytes):
         """
         Send a packet via LoRa

@@ -28,7 +28,6 @@ class LoRaPacket(LoRa):
     # Packet types
     TYPE_GPS = 0x01
     TYPE_SOS = 0x02
-    TYPE_KEEPALIVE = 0x03
     
     def __init__(self, rx_led=None, sos_led=None, verbose=False, enable_influxdb=True):
         """
@@ -77,7 +76,7 @@ class LoRaPacket(LoRa):
         
         Args:
             device_id: uint16_t device ID
-            packet_type: uint8_t packet type (0x01=GPS, 0x02=SOS, 0x03=KEEPALIVE)
+            packet_type: uint8_t packet type (0x01=GPS, 0x02=SOS)
             priority: uint8_t priority (0=normal, 1=high)
             payload_str: string payload (max 100 chars, will be padded/truncated)
             timestamp_str: string timestamp (max 20 chars, will be padded/truncated)
@@ -147,7 +146,6 @@ class LoRaPacket(LoRa):
             type_names = {
                 self.TYPE_GPS: 'GPS',
                 self.TYPE_SOS: 'SOS',
-                self.TYPE_KEEPALIVE: 'KEEPALIVE'
             }
             type_name = type_names.get(pkt_type, 'Unknown')
             
@@ -298,9 +296,6 @@ class LoRaPacket(LoRa):
         elif packet_type == self.TYPE_GPS:
             if self.rx_led:
                 self.rx_led.blink(on_time=0.3, off_time=0.3, n=3, background=True)
-        elif packet_type == self.TYPE_KEEPALIVE:
-            if self.rx_led:
-                self.rx_led.blink(on_time=0.2, off_time=0.2, n=2, background=True)
         else:
             if self.rx_led:
                 self.rx_led.blink(on_time=0.5, off_time=0.5, n=1, background=True)

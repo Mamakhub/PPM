@@ -113,7 +113,7 @@ The PVM packet is a fixed 126-byte structure shared between firmware and host:
 
 - struct layout (little-endian): `<H B B 100s 20s H`
   - `uint16_t device_id` (2 bytes)
-  - `uint8_t packet_type` (1 byte) — 0x01 = GPS, 0x02 = SOS, 0x03 = KEEPALIVE
+  - `uint8_t packet_type` (1 byte) — 0x01 = GPS, 0x02 = SOS
   - `uint8_t priority` (1 byte)
   - `char payload[100]` (100 bytes) — UTF-8 string, padded or truncated
   - `char timestamp[20]` (20 bytes) — `DD-MM-YYYY HH:MM:SS`, padded/truncated
@@ -128,7 +128,7 @@ Conventions:
 
 ## Integration with `PVM` firmware
 
-Firmware for the Portect Vessel Module (ESP32) is in the `PVM/` folder (PlatformIO). Keep these aligned:
+Firmware for the Portect Vessel Module (ESP32) is in the `PVM/` Repository (PlatformIO). Keep these aligned:
 
 - Update `PPM/LoRa.py` if you change the firmware packet struct (`PVM/include/LoRaPacket.h`).
 - Ensure radio parameters (frequency, SF, BW, sync word) match on both sides.
@@ -154,7 +154,7 @@ PVM/                  # Firmware counterpart (ESP32, PlatformIO)
 
 ## Features
 
-- Receive and parse fixed-size PVM packets (GPS, SOS, keepalive)
+- Receive and parse fixed-size PVM packets (GPS, SOS)
 - CRC-16 verification compatible with ESP32 firmware
 - Optional InfluxDB integration for storing GPS points
 - Optional periodic TX helper for testing
